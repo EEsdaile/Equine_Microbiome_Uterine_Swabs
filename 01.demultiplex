@@ -1,0 +1,56 @@
+rule all:
+        input:
+                "01.uterine_swab_demux.qzv",
+		"/media/esdaile/6A/2025_16S_Data_Horse/Multiplexed/for_qiime/barcodes.fastq.gz"
+
+rule rename_files:
+	input:
+		F="/media/esdaile/6A/2025_16S_Data_Horse/Multiplexed/Undetermined_S0_L001_R1_001.fastq.gz",
+		R="/media/esdaile/6A/2025_16S_Data_Horse/Multiplexed/Undetermined_S0_L001_R2_001.fastq.gz",
+		I="/media/esdaile/6A/2025_16S_Data_Horse/Multiplexed/Undetermined_S0_L001_I1_001.fastq.gz"
+	output:
+		F="/media/esdaile/6A/2025_16S_Data_Horse/Multiplexed/for_qiime/forward.fastq.gz",
+		R="/media/esdaile/6A/2025_16S_Data_Horse/Multiplexed/for_qiime/reverse.fastq.gz",
+		I="/media/esdaile/6A/2025_16S_Data_Horse/Multiplexed/for_qiime/barcodes.fastq.gz"
+	run:
+		shell("cp {input.F} {output.F}")
+		shell("cp {input.R} {output.R}")
+		shell("cp {input.I} {output.I}")
+
+rule import:
+	input:
+		"/media/esdaile/6A/2025_16S_Data_Horse/Multiplexed/for_qiime"
+	output:
+		"uterine_swab_multiplexed-seqs.qza"
+	shell:
+		"qiime tools import \
+		--type EMPPairedEndSequences \
+		--input-path {input} \
+		--output-path {output}"
+
+rule demux:
+        input:
+                barcodes="barcodes.txt",
+		seqs="uterine_swab_multiplexed-seqs.qza"
+        output: 
+                out="01.uterine_swab_demux.qza",
+                error="01.uterine_swab_demux_error.qza"
+        shell:
+                "qiime demux emp-paired \
+                --m-barcodes-file {input.barcodes} \
+                --m-barcodes-column barcode \
+                --p-rev-comp-mapping-barcodes \
+                --p-rev-comp-barcodes \
+                --i-seqs {input.seqs} \
+                --o-per-sample-sequences {output.out} \
+                --o-error-correction-details {output.error}"
+
+rule demux_summarize:
+        input:
+                "01.uterine_swab_demux.qza"
+        output:
+                "01.uterine_swab_demux.qzv"
+        shell:
+                "qiime demux summarize \
+                --i-data {input} \
+                --o-visualization {output}"
