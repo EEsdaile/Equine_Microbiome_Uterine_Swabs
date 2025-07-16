@@ -1,0 +1,56 @@
+rule all:
+	input:
+		"02_repSeqs_uterine_swab.qzv",
+		"02_summarize_uterine_swab.qzv",
+		"02_stats_uterine_swab.qzv"
+
+rule denoise:
+	input:
+		"01.uterine_swab_demux.qza"
+	output:
+		rep_seqs="02_repSeqs_uterine_swab.qza",
+                stats="02_stats_uterine_swab.qza",
+                table="02_table_uterine_swab.qza"
+	shell:
+		"qiime dada2 denoise-paired \
+                --i-demultiplexed-seqs {input} \
+                --p-trim-left-f 0 \
+                --p-trim-left-r 0 \
+                --p-trunc-len-r 240 \
+                --p-trunc-len-f 230 \
+                --p-n-threads 6 \
+                --o-representative-sequences {output.rep_seqs} \
+                --o-denoising-stats {output.stats} \
+                --o-table {output.table}"
+
+rule tabulate:
+	input:
+		"02_stats_uterine_swab.qza"
+	output:
+		"02_stats_uterine_swab.qzv"
+	shell:
+		"qiime metadata tabulate \
+                --m-input-file {input}  \
+                --o-visualization {output}"
+
+rule feature_summarize:
+	input:
+		table="02_table_uterine_swab.qza",
+		metadata="metadata.txt"
+	output:
+		"02_summarize_uterine_swab.qzv"
+	shell: 
+		"qiime feature-table summarize \
+                --i-table {input.table} \
+                --m-sample-metadata-file {input.metadata} \
+                --o-visualization {output}"
+
+rule tabulate_seqs:
+	input:
+		"02_repSeqs_uterine_swab.qza"
+	output:
+		"02_repSeqs_uterine_swab.qzv"
+	shell:
+		"qiime feature-table tabulate-seqs \
+                --i-data {input} \
+                --o-visualization {output}"
