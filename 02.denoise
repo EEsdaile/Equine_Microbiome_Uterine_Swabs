@@ -6,7 +6,7 @@ rule all:
 
 rule denoise:
 	input:
-		"01.uterine_swab_demux.qza"
+		"01_uterine_swab_demux.qza"
 	output:
 		rep_seqs="02_repSeqs_uterine_swab.qza",
                 stats="02_stats_uterine_swab.qza",
