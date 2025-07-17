@@ -1,0 +1,24 @@
+rule all:
+	input:
+		"/media/esdaile/6A/silva_taxonomy/silva_138.2_seqs.qza",
+		"/media/esdaile/6A/silva_taxonomy/silva_138.2_taxonomy.qza"
+
+
+rule get_silva_taxonomy:
+	input:
+		version="138.2",
+		target="SSURef_NR99",
+	output:
+		seqs="silva_138.2_seqs.qza",
+		taxa="silva_138.2_taxonomy.qza",
+		dir="/media/esdaile/6A/silva_taxonomy"
+	shell:
+		"qiime rescript get-silva-data \
+	        --p-version {input.version} \
+		--p-target {input.target} \
+		--p-include_species_labels True \
+		--p-rank_propagation True \
+		--p-download_sequences True \
+		--o-silva-sequences {output.seqs} \
+		--o-silva-taxonomy {output.taxa} \
+		--output-dir {output.dir}
