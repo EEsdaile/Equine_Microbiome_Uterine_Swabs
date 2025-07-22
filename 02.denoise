@@ -39,7 +39,7 @@ rule feature_summarize:
 		metadata="metadata.txt"
 	output:
 		"02_summarize_uterine_swab.qzv"
-	shell: 
+	shell:
 		"qiime feature-table summarize \
                 --i-table {input.table} \
                 --m-sample-metadata-file {input.metadata} \
@@ -54,3 +54,4 @@ rule tabulate_seqs:
 		"qiime feature-table tabulate-seqs \
                 --i-data {input} \
                 --o-visualization {output}"
+

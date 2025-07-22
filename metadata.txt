@@ -1,30 +1,30 @@
-sampleID	Primer Plate	Well	BarcodeSequence	Sample Plate	Swab-Number	Collection Date	Growth?
-blank-crude-extraction-0	1	F12	AGAGCCAAGAGC	Elizabeth	N/A	N/A	N/A
-blank-crude-extraction-1	1	C8	CGGTGACCTACT	Elizabeth	N/A	N/A	N/A
-EQ25010	1	G8	TAACAATAATTC	Elizabeth	S1	5/2/2025	N
-EQ25011	1	G9	CTTATTAAACGT	Elizabeth	S2	5/2/2025	Y
-EQ25012	1	G10	GCTCGAAGATTC	Elizabeth	S3	5/3/2025	Y
-EQ25013	1	G11	TATTTGATTGGT	Elizabeth	S5	5/7/2025	N
-EQ25014	1	G12	TGTCAAAGTGAC	Elizabeth	S6	5/8/2025	Y
-EQ25015	1	F7	GAAGAGGGTTGA	Elizabeth	S10	5/13/2025	N
-EQ25016	1	F8	TGAGTGGTCTGT	Elizabeth	S11	5/13/2025	Y
-EQ25017	1	F9	TTACACAAAGGC	Elizabeth	S14	5/16/2025	M
-EQ25018	1	F10	ACGACGCATTTG	Elizabeth	S15	5/17/2025	N
-EQ25019	1	F11	TATCCAAGCGCA	Elizabeth	S16	5/17/2025	N
-EQ25020	1	E7	GTTGATACGATG	Elizabeth	S17	5/20/2025	M
-EQ25021-1	1	E8	GTCAACGCTGTC	Elizabeth	S18	5/21/2025	Y
-EQ25021-2	1	E11	ATTACGTATCAT	Elizabeth	S19	5/24/2025	M
-EQ25021-3	1	C10	CTTGATTCTTGA	Elizabeth	S20	5/26/2025	y
-EQ25022	1	E9	TGAGACCCTACA	Elizabeth	S21	5/26/2025	N
-EQ25023	1	E10	ACTTGGTGTAAG	Elizabeth	S22	5/26/2025	N
-EQ25024	1	E12	CACGCAGTCTAC	Elizabeth	S24	5/27/2025	Y
-EQ25025	1	D7	ATACATGCAAGA	Elizabeth	S25	5/28/2025	N
-EQ25026	1	D8	CTTAGTGCAGAA	Elizabeth	S27	5/29/2025	Y
-EQ25027	1	D9	AATCTTGCGCCG	Elizabeth	S28	5/29/2025	M
-EQ25028	1	D10	AGGATCAGGGAA	Elizabeth	S29	5/29/2025	N
-EQ25029	1	D11	AATAACTAGGGT	Elizabeth	S30	5/30/2025	M
-EQ25030	1	D12	TATTGCAGCAGC	Elizabeth	S31	5/30/2025	M
-EQ25031	1	C7	TGATATCGTCTT	Elizabeth	S32	5/30/2025	N
-EQ25032	1	C11	GAAATCTTGAAG	Elizabeth	S33	6/2/2025	N
-EQ25033	1	C12	GAGATACAGTTC	Elizabeth	S35	6/3/2025	M
-NTC-libprep1	1	A7	TACAATATCTGT	Elizabeth	N/A	N/A	N/A
+SampleID	Swab_Number	Included_more_than_once?	Extraction_Group	DNA_Concentration	Data_passed_QC	Date_Swabbed	Breed	Age	Town	State	Culturer	Maiden	Cyto_grade	Culture_note	Number_of_Pathogens	Strep_+	Staph_+	E_coli_+	Klebsiella_+	Psuedomoas_+	One_or_more_colonies_or_haze	Previous_EE_culture_status	Treated	largest_follicle	CL	endo_folds	ut_fluid	temp	Drug_treatment	Pregnant	Last_day_checked	Note
+EQ25031	1	N	2	9.6	N	5/2/2025	Friesian	2009	Local	CP	JS	Y	0	24h_NG	0	N	N	N	N	N	N	N	N	42	N	3	T4	100.9	N/A	Y	24d	right_ovary_removed_due_to__tumor
+EQ25021-1	2	Y	2	4.98	Y	5/2/2025	Quarter_Horse	2017	Monte_Vista	CO	PR	ET	1	klebsiella	1	N	N	N	Y	N	Y	Y	Y	20	Y	2	0	Not_measured	gent/bicarb,_PG,_reg	N	No	multiple_cultures
+EQ25032	3	N	2	6.93	Y	5/3/2025	Appaloosa	2002	Loveland	CO	JF	N	1	staph	1	N	Y	N	N	N	Y	Y	N	38	N	3	M3	Not_measured	oxy	UN	Unknown	getting_oxy
+EQ25033	5	N	2	17.9	Y	5/7/2025	Belgian	2012	Loveland	CO	JH	Y	0	24h_NG	0	N	N	N	N	N	Y	N	N	33	N	0+	S4	99.7	N/A	N	No	Never_bred
+EQ25025	6	N	2	6.43	Y	5/8/2025	Thoroughbred	2000_or_2011	Parker	CO	PR	N	2	strep_and_e_coli	2	Y	N	Y	N	N	Y	Y	Y	10	Y	0+	S4	Not_measured	flunixin_IV,_oxy,_lavage,_buscopan	Y	57d	bred_2_days_prior
+EQ25026	10	N	2	1.03	N	5/13/2025	Quarter_Horse	2016	Sedalia	CO	PR	ET	0	24h_NG	0	N	N	N	N	N	Y	N	N	27	N	L	S4	Not_measured	N/A	N	No	has_had_negative_flushes_earlier_in_season
+EQ25027	11	N	2	6.49	N	5/13/2025	Hanoverian	2010	Franktown	CO	PR	N	0	strep_zoo	1	Y	N	N	N	N	Y	Y	Y	31	Y	1	0	Not_measured	Amp/tris	UN	Unknown	cushings,_positive_for_strep_and_e_coli_in_2021
+EQ25028	14	N	2	7.2	Y	5/16/2025	Arabian	2015	Littleton	CO	PR	N	0	24h_NG	0	N	N	N	N	N	Y	M	N	35	N	2	0	Not_measured	N/A	Y	16d	Later_cultured_positive
+EQ25029	15	N	2	8.67	N	5/17/2025	APHA	2015	Berthoud	CO	BK	N	0	24h_NG	0	N	N	N	N	N	N	N	N	28	Y	0+	S4	Not_measured	PG	Lost	16d_yes,_30d_HB-	
+EQ25030	16	N	2	17.5	N	5/17/2025	Quarter_Horse	2013	Mitchel	NE	BK	Y	0	24h_NG	0	N	N	N	N	N	N	N	N	34	N	2	0	Not_measured	N/A	Y	27d	bred_2+_weeks_prior_-_frozen
+EQ25020	17	N	2	4.71	Y	5/20/2025	Quarter_Horse	2016	Cheyenne	WY	JS	N	0	strep	1	Y	N	N	N	N	Y	M	Y	42	N	2	T4	100.1	Amp/tris	Y	17d	1_month_post_foaling
+EQ25021-2	18	Y	2	4.91	N	5/21/2025	Quarter_Horse	2017	Monte_Vista	CO	BK	ET	UN	light_staph_and_kelbsiella	2	N	Y	N	Y	N	Y	Y	Y	31	N	3	T3	Not_measured	Cipro_+_YUN	N	No	
+EQ25022	19	N	2	5.22	Y	5/24/2025	Quarter_Horse	2020	Walden	CO	JF	N	0	24h_NG	0	N	N	N	N	N	Y	M	N	38	N	2	0	Not_measured	hcg	Y	14d	culture_for_teaching
+EQ25023	20	N	2	9.33	Y	5/26/2025	Quarter_Horse	2010	Kersey	CO	JS	N	3	E_coli,_strep	2	Y	N	Y	N	N	Y	Y	Y	37	N	2+	0	Not_measured	histrelin,_oxy,_amp/tri,_equioxx,_lvl	UN	Unknown	fungal_infection_in_2022
+EQ25021-3	21	Y	2	12.3	Y	5/26/2025	Quarter_Horse	2017	Monte_Vista	CO	JF	ET	3	24h_NG	0	N	N	N	N	N	N	N	N	40	N	1	T4	Not_measured	oxy,_bute	N	No	
+EQ25024	22	N	2	0.767	N	5/26/2025	Quarter_Horse	2017	Rock_Springs	WY	JF	U	2	24h_NG	0	N	N	N	N	N	N	N	N	44	N	2	T1	Not_measured	Histerlin,_misoprostol	Y	34d	Barren_for_two_years._2024_pos_culture
+EQ25015	24	N	2	7.87	N	5/27/2025	Quarter_Horse	2007	Lakewood	CO	JF	N	0	staph_and_strep	2	Y	Y	N	N	N	Y	Y	Y	30	N	2	S4	Not_measured	amp,_lavage	N	No	bred_this_cycle,_did_not_take
+EQ25016	25	N	2	12	Y	5/28/2025	Quarter_Horse	2007	North_Platte	NE	JF	N	0	24h_NG	0	N	N	N	N	N	N	N	N	5	Y	0	0	Not_measured	none	N/A	Not_bred	2B_biopsy,_has_ticks
+EQ25017	27	N	2	14.5	N	5/29/2025	Grade	2016	Ramah	CO	OB	N	1	pseudomonas_and_light_strep	2	Y	N	N	N	Y	Y	Y	Y	28	N	1	S3	Not_measured	emikacin,_peniclin/amp,_amp/?	Y	28d	cervix_defect,_hyperechoic_line
+EQ25018	28	N	2	6.65	N	5/29/2025	Grade	2018	Fort_Collins	CO	JF	N	0	24h_NG	0	N	N	N	N	N	Y	M	N	36	N	2	0	Not_measured	N/A	Y	16d	
+EQ25019	29	N	2	6.35	N	5/29/2025	Quarter_Horse	2012	Merino	CO	JF	N	0	24h_NG	0	N	N	N	N	N	N	N	N	35	N	3	T3	Not_measured	oxy	Y	24d	1_month_post_foaling
+EQ25010	30	N	2	9	Y	5/30/2025	Quarter_Horse	2019	Livermore	CO	JS	N	lack_of_nuclei	pink_haze	0	N	N	N	N	N	Y	M	N	37	Y	2	0	Not_measured	histrelin	N	No	
+EQ25011	31	N	2	12.5	Y	5/30/2025	Quarter_Horse	2016	Rock_Springs	WY	JF	N	0	pink_haze	0	N	N	N	N	N	Y	M	N	30	N	2	0	Not_measured	N/A	N	No	
+EQ25012	32	N	1	5.31	Y	5/30/2025	Arabian	2017	Washoe_Valley	NV	JF	N	0	24h_NG	0	N	N	N	N	N	N	N	N	30	N	1	S4	Not_measured	dom	N	No	marked_as_positive_culture
+EQ25013	33	N	1	4.97	Y	6/2/2025	Quarter_Horse	2019	Colorado_Springs	CO	JF	N	0	24h_NG	0	N	N	N	N	N	N	N	N	33	N	1+	T4	Not_measured	PG	N	No	
+EQ25014	35	N	1	5.18	Y	6/3/2025	Quarter_Horse	2018	Riverton	WY	JS	N	0	24h_NG	0	N	N	N	N	N	Y	M	N	36	N	0+	0	Not_measured	histrelin,_hcg	Y	12d	marked_as_positive_culture
+NTC-libprep1	N/A	CTRL	N/A	N/A	N	N/A	CTRL	N/A	CTRL	CTRL	N/A	CTRL	N/A	CTRL	N/A	CTRL	CTRL	CTRL	CTRL	CTRL	CTRL	CTRL	CTRL	N/A	CTRL	CTRL	CTRL	CTRL	CTRL			CTRL
+blank-crude-extraction-0	N/A	CTRL	2	0	N	N/A	CTRL	N/A	CTRL	CTRL	N/A	CTRL	N/A	CTRL	N/A	CTRL	CTRL	CTRL	CTRL	CTRL	CTRL	CTRL	CTRL	N/A	CTRL	CTRL	CTRL	CTRL	CTRL			CTRL
+blank-crude-extraction-1	N/A	CTRL	2	0	N	N/A	CTRL	N/A	CTRL	CTRL	N/A	CTRL	N/A	CTRL	N/A	CTRL	CTRL	CTRL	CTRL	CTRL	CTRL	CTRL	CTRL	N/A	CTRL	CTRL	CTRL	CTRL	CTRL			CTRL
