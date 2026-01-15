@@ -1,0 +1,143 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                  count
+-----------------  -------
+all                      1
+denoise                  1
+feature_summarize        1
+tabulate                 1
+tabulate_seqs            1
+total                    5
+
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+
+[Wed Jan 14 14:56:59 2026]
+rule denoise:
+    input: 01_uterine_swab_demux.qza
+    output: 02_repSeqs_uterine_swab.qza, 02_stats_uterine_swab.qza, 02_table_uterine_swab.qza
+    jobid: 2
+    reason: Missing output files: 02_table_uterine_swab.qza, 02_repSeqs_uterine_swab.qza, 02_stats_uterine_swab.qza; Updated input files: 01_uterine_swab_demux.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime dada2 denoise-paired                 --i-demultiplexed-seqs 01_uterine_swab_demux.qza                 --p-trim-left-f 0                 --p-trim-left-r 0                 --p-trunc-len-r 240                 --p-trunc-len-f 230                 --p-n-threads 6                 --o-representative-sequences 02_repSeqs_uterine_swab.qza                 --o-denoising-stats 02_stats_uterine_swab.qza                 --o-table 02_table_uterine_swab.qza
+Saved FeatureTable[Frequency] to: 02_table_uterine_swab.qza
+Saved FeatureData[Sequence] to: 02_repSeqs_uterine_swab.qza
+Saved SampleData[DADA2Stats] to: 02_stats_uterine_swab.qza
+[Wed Jan 14 15:06:05 2026]
+Finished job 2.
+1 of 5 steps (20%) done
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (3)
+Select jobs to execute...
+Welcome to the CBC MILP Solver 
+Version: 2.10.12 
+Build Date: Sep  3 2024 
+
+command line - cbc /scratch/alpine/c829993361@colostate.edu/.tmp/9ab8fd0515824edc955fd3bcbc4b4851-pulp.mps max timeMode elapsed branch printingOptions all solution /scratch/alpine/c829993361@colostate.edu/.tmp/9ab8fd0515824edc955fd3bcbc4b4851-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 7 COLUMNS
+At line 23 RHS
+At line 26 BOUNDS
+At line 30 ENDATA
+Problem MODEL has 2 rows, 3 columns and 6 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 6 - 0.00 seconds
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from 6 to 1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                6.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.01
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.02
+
+Selected jobs (3)
+Resources after job selection: {'_cores': 1, '_nodes': 9223372036854775804}
+
+[Wed Jan 14 15:06:05 2026]
+rule tabulate_seqs:
+    input: 02_repSeqs_uterine_swab.qza
+    output: 02_repSeqs_uterine_swab.qzv
+    jobid: 1
+    reason: Input files updated by another job: 02_repSeqs_uterine_swab.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-table tabulate-seqs                 --i-data 02_repSeqs_uterine_swab.qza                 --o-visualization 02_repSeqs_uterine_swab.qzv
+
+[Wed Jan 14 15:06:05 2026]
+rule feature_summarize:
+    input: 02_table_uterine_swab.qza, metadata.txt
+    output: 02_summarize_uterine_swab.qzv
+    jobid: 3
+    reason: Input files updated by another job: 02_table_uterine_swab.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-table summarize                 --i-table 02_table_uterine_swab.qza                 --m-sample-metadata-file metadata.txt                 --o-visualization 02_summarize_uterine_swab.qzv
+
+[Wed Jan 14 15:06:05 2026]
+rule tabulate:
+    input: 02_stats_uterine_swab.qza
+    output: 02_stats_uterine_swab.qzv
+    jobid: 4
+    reason: Input files updated by another job: 02_stats_uterine_swab.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime metadata tabulate                 --m-input-file 02_stats_uterine_swab.qza                  --o-visualization 02_stats_uterine_swab.qzv
+Saved Visualization to: 02_stats_uterine_swab.qzv
+[Wed Jan 14 15:06:25 2026]
+Finished job 4.
+2 of 5 steps (40%) done
+Saved Visualization to: 02_repSeqs_uterine_swab.qzv
+Saved Visualization to: 02_summarize_uterine_swab.qzv
+[Wed Jan 14 15:06:26 2026]
+Finished job 1.
+3 of 5 steps (60%) done
+[Wed Jan 14 15:06:27 2026]
+Finished job 3.
+4 of 5 steps (80%) done
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+
+[Wed Jan 14 15:06:27 2026]
+localrule all:
+    input: 02_repSeqs_uterine_swab.qzv, 02_summarize_uterine_swab.qzv, 02_stats_uterine_swab.qzv
+    jobid: 0
+    reason: Input files updated by another job: 02_repSeqs_uterine_swab.qzv, 02_stats_uterine_swab.qzv, 02_summarize_uterine_swab.qzv
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+[Wed Jan 14 15:06:27 2026]
+Finished job 0.
+5 of 5 steps (100%) done
+Complete log: .snakemake/log/2026-01-14T145654.813380.snakemake.log
+unlocking
+removing lock
+removing lock
+removed all locks
