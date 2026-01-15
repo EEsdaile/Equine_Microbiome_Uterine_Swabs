@@ -1,7 +1,7 @@
 rule all:
 	input:
-		"/media/esdaile/6A/silva_taxonomy_138.2/silva_138.2_seqs.qza",
-		"/media/esdaile/6A/silva_taxonomy_138.2/silva_138.2_taxonomy.qza",
+		"/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs.qza",
+		"/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza",
 		"03_uterine_swabs_alpha_rarefaction_curves_16S.qzv",
 		"03_table_uterine_swab_filter_taxa_samples_reads.qzv",
 		"03_uterine_swab_taxonomy.qzv",
@@ -12,9 +12,9 @@ rule all:
 
 rule get_silva_taxonomy:
 	output:
-		seqs="/media/esdaile/6A/silva_taxonomy_138.2/silva_138.2_seqs.qza",
-		taxa="/media/esdaile/6A/silva_taxonomy_138.2/silva_138.2_taxonomy.qza",
-		dir=directory("/media/esdaile/6A/silva_taxonomy_138.2/unspecified")
+		seqs="/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs.qza",
+		taxa="/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza",
+		dir=directory("/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/unspecified")
 	shell:
 		"qiime rescript get-silva-data \
 		--p-version 138.2 \
@@ -28,26 +28,26 @@ rule get_silva_taxonomy:
 
 rule silva_reverse_transcribe:
 	input:
-		"/media/esdaile/6A/silva_taxonomy_138.2/silva_138.2_seqs.qza"
+		"/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs.qza"
 	output:
-		"/media/esdaile/6A/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza"
+		"/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza"
 	shell:
 		"qiime rescript reverse-transcribe \
 		--i-rna-sequences {input} \
 		--o-dna-sequences {output}"
 
 #run on alpine due to compute requirements
-#rule silva_classifier:
-#	input:
-#		seqs="/media/esdaile/6A/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza",
-#		taxa="/media/esdaile/6A/silva_taxonomy_138.2/silva_138.2_taxonomy.qza"
-#	output:
-#		"silva_138.2_classifier.qza"
-#	shell:
-#		"qiime feature-classifier fit-classifier-naive-bayes \
-#		--i-reference-reads {input.seqs} \
-#		--i-reference-taxonomy {input.taxa} \
-#		--o-classifier {output}"
+rule silva_classifier:
+	input:
+		seqs="/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza",
+		taxa="/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza"
+	output:
+		"silva_138.2_classifier.qza"
+	shell:
+		"qiime feature-classifier fit-classifier-naive-bayes \
+		--i-reference-reads {input.seqs} \
+		--i-reference-taxonomy {input.taxa} \
+		--o-classifier {output}"
 
 
 rule classify_features:
@@ -138,7 +138,7 @@ rule taxonomy_barplot:
 #rule make_tree:
 #	input:
 #		repseqs="02_repSeqs_uterine_swab.qza",
-#		backbone="/media/esdaile/6A/silva_taxonomy_138.2/silva_138.2_taxonomy.qza"
+#		backbone="/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza"
 #	output:
 #		tree="03_uterine_swab_tree.qza",
 #		placements="03_uterine_swab_tree_placements.qza"
