@@ -1,0 +1,33 @@
+rule all:
+	input:
+		"/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs.qza",
+		"/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza",
+		"/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza"
+
+
+
+rule get_silva_taxonomy:
+	output:
+		seqs="/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs.qza",
+		taxa="/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza",
+		dir=directory("/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/unspecified")
+	shell:
+		"qiime rescript get-silva-data \
+		--p-version 138.2 \
+		--p-target SSURef_NR99 \
+		--p-no-include-species-labels \
+		--p-rank-propagation \
+		--p-download-sequences \
+		--o-silva-sequences {output.seqs} \
+		--o-silva-taxonomy {output.taxa} \
+		--output-dir {output.dir}"
+
+rule silva_reverse_transcribe:
+	input:
+		"/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs.qza"
+	output:
+		"/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza"
+	shell:
+		"qiime rescript reverse-transcribe \
+		--i-rna-sequences {input} \
+		--o-dna-sequences {output}"

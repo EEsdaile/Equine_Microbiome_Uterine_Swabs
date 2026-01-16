@@ -1,0 +1,130 @@
+rule classify_features:
+	input:
+		refseqs="02_repSeqs_uterine_swab.qza",
+		backbone="silva_138.2_classifier.qza"
+	output:
+		"03_uterine_swab_taxonomy.qza"
+	shell:
+		"qiime feature-classifier classify-sklearn \
+		--i-reads {input.refseqs} \
+		--i-classifier {input.backbone} \
+		--o-classification {output}"
+
+rule visualize_features:
+	input:
+		"03_uterine_swab_taxonomy.qza"
+	output:
+		"03_uterine_swab_taxonomy.qzv"
+	shell:
+		"qiime metadata tabulate \
+		 --m-input-file {input} \
+		 --o-visualization {output}"
+
+
+rule filter_mito_chloro:
+	input:
+		table="02_table_uterine_swab.qza",
+		taxonomy="03_uterine_swab_taxonomy.qza"
+	output:
+		"03_table_uterine_swab_filter_taxa.qza"
+	shell:
+		"qiime taxa filter-table \
+		--i-table {input.table} \
+		--i-taxonomy {input.taxonomy} \
+		--p-exclude mitochondria,chloroplast \
+		--o-filtered-table {output}"
+
+rule filter_samples_read_number:
+	input:
+		"03_table_uterine_swab_filter_taxa.qza"
+	output:
+		"03_table_uterine_swab_filter_taxa_samples.qza"
+	shell:
+		"qiime feature-table filter-samples \
+		 --i-table {input} \
+		 --p-min-frequency 1000 \
+		 --o-filtered-table {output}"
+
+rule filter_sequences_read_number:
+	input:
+		"03_table_uterine_swab_filter_taxa_samples.qza"
+	output:
+		"03_table_uterine_swab_filter_taxa_samples_reads.qza"
+	shell:
+		"qiime feature-table filter-features \
+		 --i-table {input} \
+		 --p-min-frequency 5 \
+		 --o-filtered-table {output}"
+
+rule visualize_filtered:
+	input:
+		filt="03_table_uterine_swab_filter_taxa_samples_reads.qza",
+		meta="metadata.txt"
+	output:
+		"03_table_uterine_swab_filter_taxa_samples_reads.qzv"
+	shell:
+		"qiime feature-table summarize \
+		--i-table {input.filt} \
+		--m-sample-metadata-file {input.meta} \
+		--o-visualization {output}"
+
+rule taxonomy_barplot:
+	input:
+		table="03_table_uterine_swab_filter_taxa_samples_reads.qza",
+		taxa="03_uterine_swab_taxonomy.qza",
+		meta="metadata.txt"
+	output:
+		"03_uterine_swab_taxonomy_barplot.qzv"
+	shell:
+		"qiime taxa barplot \
+		--i-table {input.table} \
+		--i-taxonomy {input.taxa} \
+		--m-metadata-file {input.meta} \
+		--o-visualization {output}"
+
+
+#rule make_tree:
+#	input:
+#		repseqs="02_repSeqs_uterine_swab.qza",
+#		backbone="/projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza"
+#	output:
+#		tree="03_uterine_swab_tree.qza",
+#		placements="03_uterine_swab_tree_placements.qza"
+#	shell:
+#		"qiime fragment-insertion sepp \
+#		--i-representative-sequences {input.repseqs} \
+#		--i-reference-database {input.backbone} \
+#		--p-threads 12 \
+#		--o-tree {output.tree} \
+#		--o-placements {output.placements}"
+
+
+rule rarefaction:
+	input:
+		filt="03_table_uterine_swab_filter_taxa_samples_reads.qza",
+		meta="metadata.txt"
+	output:
+		"03_uterine_swabs_alpha_rarefaction_curves_16S.qzv"
+	shell:
+		"qiime diversity alpha-rarefaction \
+		--i-table {input.filt} \
+		--m-metadata-file {input.meta} \
+		--o-visualization {output} \
+		--p-min-depth 10 \
+		--p-max-depth 6000"
+
+#rule diversity:
+#	input:
+#		table="03_table_uterine_swab_no_mito_no_chloro_16S.qza",
+#		tree="03_uterine_swab_tree.qza",
+#		meta="metadata.txt"
+#	output:
+#		directory("03_uterine_swab_core-metrics-results")
+#	shell:
+#		"qiime diversity core-metrics-phylogenetic \
+#		--i-table {input.table} \
+#		--i-phylogeny {input.tree} \
+#		--m-metadata-file {input.meta} \
+#		--p-sampling-depth 1300 \
+#		--output-dir core-metrics-results"
+

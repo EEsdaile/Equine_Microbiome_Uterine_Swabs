@@ -1,0 +1,91 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                             count
+----------------------------  -------
+all                                 1
+classify_features                   1
+filter_mito_chloro                  1
+filter_samples_read_number          1
+filter_sequences_read_number        1
+rarefaction                         1
+silva_classifier                    1
+taxonomy_barplot                    1
+visualize_features                  1
+visualize_filtered                  1
+total                              10
+
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+
+[Thu Jan 15 11:37:40 2026]
+rule silva_classifier:
+    input: /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza, /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza
+    output: silva_138.2_classifier.qza
+    jobid: 7
+    reason: Missing output files: silva_138.2_classifier.qza; Updated input files: /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza, /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-classifier fit-classifier-naive-bayes 		--i-reference-reads /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza 		--i-reference-taxonomy /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza 		--o-classifier silva_138.2_classifier.qza
+/usr/bin/bash: line 1: 3539815 Killed                  qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza --i-reference-taxonomy /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza --o-classifier silva_138.2_classifier.qza
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy", line 103, in __rule_silva_classifier
+    output:
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime feature-classifier fit-classifier-naive-bayes 		--i-reference-reads /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza 		--i-reference-taxonomy /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza 		--o-classifier silva_138.2_classifier.qza' returned non-zero exit status 137.
+
+[Thu Jan 15 11:40:26 2026]
+Error in rule silva_classifier:
+    jobid: 7
+    input: /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza, /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza
+    output: silva_138.2_classifier.qza
+    shell:
+        qiime feature-classifier fit-classifier-naive-bayes 		--i-reference-reads /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza 		--i-reference-taxonomy /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza 		--o-classifier silva_138.2_classifier.qza
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy", line 103, in __rule_silva_classifier
+    output:
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime feature-classifier fit-classifier-naive-bayes 		--i-reference-reads /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza 		--i-reference-taxonomy /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza 		--o-classifier silva_138.2_classifier.qza' returned non-zero exit status 137.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 715, in _callback
+    raise ex
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 699, in cached_or_run
+    run_func(*args)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2692, in run_wrapper
+    raise RuleException(
+snakemake.exceptions.RuleException: CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy, line 47:
+Command 'set -euo pipefail;  qiime feature-classifier fit-classifier-naive-bayes 		--i-reference-reads /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza 		--i-reference-taxonomy /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza 		--o-classifier silva_138.2_classifier.qza' returned non-zero exit status 137.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy", line 47, in __rule_silva_classifier
+
+RuleException:
+CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy, line 47:
+Command 'set -euo pipefail;  qiime feature-classifier fit-classifier-naive-bayes 		--i-reference-reads /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_seqs_reverse_transcript.qza 		--i-reference-taxonomy /projects/c829993361@colostate.edu/2025_16S_Equine_Microbiome_Data/silva_taxonomy_138.2/silva_138.2_taxonomy.qza 		--o-classifier silva_138.2_classifier.qza' returned non-zero exit status 137.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy", line 47, in __rule_silva_classifier
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2026-01-15T113739.142565.snakemake.log
+unlocking
+removing lock
+removing lock
+removed all locks
+slurmstepd: error: Detected 1 oom_kill event in StepId=22822306.batch. Some of the step tasks have been OOM Killed.
