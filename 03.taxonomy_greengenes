@@ -6,20 +6,10 @@ rule all:
 		"03_uterine_swab_taxonomy_barplot_greengenes.qzv",
 		directory("03_uterine_swab_core-metrics-results_greengenes")
 
-rule silva_reverse_transcribe:
-	input:
-		"/projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.seqs.fna.qza"
-	output:
-		"/projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.seqs.RT.fna.qza"
-	shell:
-		"qiime rescript reverse-transcribe \
-		--i-rna-sequences {input} \
-		--o-dna-sequences {output}"
-
 rule classify_features:
 	input:
 		refseqs="02_repSeqs_uterine_swab.qza",
-		backbone="/projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza"
+		backbone="/projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/current/2024.09.backbone.v4.nb.qza"
 	output:
 		"03_uterine_swab_taxonomy_greengenes.qza"
 	shell:
@@ -104,7 +94,7 @@ rule taxonomy_barplot:
 rule make_tree:
 	input:
 		repseqs="02_repSeqs_uterine_swab.qza",
-		backbone="/projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza"
+		backbone="/projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza"
 	output:
 		tree="03_uterine_swab_tree_greengenes.qza",
 		placements="03_uterine_swab_tree_placements_greengenes.qza"

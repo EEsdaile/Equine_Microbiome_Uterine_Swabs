@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --job-name=03.taxonomy_greengenes
-#SBATCH --nodes=1
-#SBATCH --ntasks=4
+#SBATCH --nodes=8
+#SBATCH --ntasks=64
 #SBATCH --partition=amilan
 #SBATCH --time=24:00:00
 #SBATCH --qos=normal

@@ -1,0 +1,284 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                             count
+----------------------------  -------
+all                                 1
+classify_features                   1
+diversity                           1
+filter_mito_chloro                  1
+filter_samples_read_number          1
+filter_sequences_read_number        1
+make_tree                           1
+rarefaction                         1
+taxonomy_barplot                    1
+visualize_features                  1
+visualize_filtered                  1
+total                              11
+
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (2)
+Select jobs to execute...
+Welcome to the CBC MILP Solver 
+Version: 2.10.12 
+Build Date: Sep  3 2024 
+
+command line - cbc /scratch/alpine/c829993361@colostate.edu/.tmp/18703618abc949ed8f2a9f35d4c54c98-pulp.mps max timeMode elapsed branch printingOptions all solution /scratch/alpine/c829993361@colostate.edu/.tmp/18703618abc949ed8f2a9f35d4c54c98-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 7 COLUMNS
+At line 18 RHS
+At line 21 BOUNDS
+At line 24 ENDATA
+Problem MODEL has 2 rows, 2 columns and 4 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 4 - 0.00 seconds
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from 4 to 1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                4.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.03
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.07
+
+Selected jobs (2)
+Resources after job selection: {'_cores': 2, '_nodes': 9223372036854775805}
+
+[Fri Feb  6 19:18:30 2026]
+rule make_tree:
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza
+    output: 03_uterine_swab_tree_greengenes.qza, 03_uterine_swab_tree_placements_greengenes.qza
+    jobid: 10
+    reason: Missing output files: 03_uterine_swab_tree_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza
+
+[Fri Feb  6 19:18:30 2026]
+rule classify_features:
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/current/2024.09.backbone.v4.nb.qza
+    output: 03_uterine_swab_taxonomy_greengenes.qza
+    jobid: 5
+    reason: Missing output files: 03_uterine_swab_taxonomy_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-classifier classify-sklearn 		--i-reads 02_repSeqs_uterine_swab.qza 		--i-classifier /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/current/2024.09.backbone.v4.nb.qza 		--o-classification 03_uterine_swab_taxonomy_greengenes.qza
+Saved FeatureData[Taxonomy] to: 03_uterine_swab_taxonomy_greengenes.qza
+[Fri Feb  6 19:21:08 2026]
+Finished job 5.
+1 of 11 steps (9%) done
+Resources before job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+Ready jobs (2)
+Select jobs to execute...
+Welcome to the CBC MILP Solver 
+Version: 2.10.12 
+Build Date: Sep  3 2024 
+
+command line - cbc /scratch/alpine/c829993361@colostate.edu/.tmp/2c6b87e87f44442f9c74ee1294a2fec8-pulp.mps max timeMode elapsed branch printingOptions all solution /scratch/alpine/c829993361@colostate.edu/.tmp/2c6b87e87f44442f9c74ee1294a2fec8-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 7 COLUMNS
+At line 18 RHS
+At line 21 BOUNDS
+At line 24 ENDATA
+Problem MODEL has 2 rows, 2 columns and 4 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 4 - 0.00 seconds
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from 4 to 1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                4.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.00
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Selected jobs (2)
+Resources after job selection: {'_cores': 1, '_nodes': 9223372036854775804}
+
+[Fri Feb  6 19:21:09 2026]
+rule visualize_features:
+    input: 03_uterine_swab_taxonomy_greengenes.qza
+    output: 03_uterine_swab_taxonomy_greengenes.qzv
+    jobid: 7
+    reason: Missing output files: 03_uterine_swab_taxonomy_greengenes.qzv; Input files updated by another job: 03_uterine_swab_taxonomy_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime metadata tabulate 		 --m-input-file 03_uterine_swab_taxonomy_greengenes.qza 		 --o-visualization 03_uterine_swab_taxonomy_greengenes.qzv
+
+[Fri Feb  6 19:21:09 2026]
+rule filter_mito_chloro:
+    input: 02_table_uterine_swab.qza, 03_uterine_swab_taxonomy_greengenes.qza
+    output: 03_table_uterine_swab_filter_taxa_greengenes.qza
+    jobid: 4
+    reason: Missing output files: 03_table_uterine_swab_filter_taxa_greengenes.qza; Input files updated by another job: 03_uterine_swab_taxonomy_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime taxa filter-table 		--i-table 02_table_uterine_swab.qza 		--i-taxonomy 03_uterine_swab_taxonomy_greengenes.qza 		--p-exclude mitochondria,chloroplast 		--o-filtered-table 03_table_uterine_swab_filter_taxa_greengenes.qza
+Saved Visualization to: 03_uterine_swab_taxonomy_greengenes.qzv
+[Fri Feb  6 19:21:25 2026]
+Finished job 7.
+2 of 11 steps (18%) done
+Saved FeatureTable[Frequency] to: 03_table_uterine_swab_filter_taxa_greengenes.qza
+[Fri Feb  6 19:21:27 2026]
+Finished job 4.
+3 of 11 steps (27%) done
+Resources before job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 2, '_nodes': 9223372036854775805}
+
+[Fri Feb  6 19:21:27 2026]
+rule filter_samples_read_number:
+    input: 03_table_uterine_swab_filter_taxa_greengenes.qza
+    output: 03_table_uterine_swab_filter_taxa_samples_greengenes.qza
+    jobid: 3
+    reason: Missing output files: 03_table_uterine_swab_filter_taxa_samples_greengenes.qza; Input files updated by another job: 03_table_uterine_swab_filter_taxa_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-table filter-samples 		 --i-table 03_table_uterine_swab_filter_taxa_greengenes.qza 		 --p-min-frequency 1000 		 --o-filtered-table 03_table_uterine_swab_filter_taxa_samples_greengenes.qza
+Saved FeatureTable[Frequency] to: 03_table_uterine_swab_filter_taxa_samples_greengenes.qza
+[Fri Feb  6 19:21:38 2026]
+Finished job 3.
+4 of 11 steps (36%) done
+Resources before job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 2, '_nodes': 9223372036854775805}
+
+[Fri Feb  6 19:21:38 2026]
+rule filter_sequences_read_number:
+    input: 03_table_uterine_swab_filter_taxa_samples_greengenes.qza
+    output: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza
+    jobid: 2
+    reason: Missing output files: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza; Input files updated by another job: 03_table_uterine_swab_filter_taxa_samples_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-table filter-features 		 --i-table 03_table_uterine_swab_filter_taxa_samples_greengenes.qza 		 --p-min-frequency 5 		 --o-filtered-table 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza
+Saved FeatureTable[Frequency] to: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza
+[Fri Feb  6 19:21:53 2026]
+Finished job 2.
+5 of 11 steps (45%) done
+Resources before job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+Ready jobs (3)
+Select jobs to execute...
+Welcome to the CBC MILP Solver 
+Version: 2.10.12 
+Build Date: Sep  3 2024 
+
+command line - cbc /scratch/alpine/c829993361@colostate.edu/.tmp/45bf2a659c874bf88980cd6668d33f53-pulp.mps max timeMode elapsed branch printingOptions all solution /scratch/alpine/c829993361@colostate.edu/.tmp/45bf2a659c874bf88980cd6668d33f53-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 7 COLUMNS
+At line 23 RHS
+At line 26 BOUNDS
+At line 30 ENDATA
+Problem MODEL has 2 rows, 3 columns and 6 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 6 - 0.00 seconds
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from 6 to 1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                6.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.00
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Selected jobs (3)
+Resources after job selection: {'_cores': 0, '_nodes': 9223372036854775803}
+
+[Fri Feb  6 19:21:53 2026]
+rule visualize_filtered:
+    input: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza, metadata.txt
+    output: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qzv
+    jobid: 6
+    reason: Missing output files: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qzv; Input files updated by another job: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-table summarize 		--i-table 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza 		--m-sample-metadata-file metadata.txt 		--o-visualization 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qzv
+
+[Fri Feb  6 19:21:53 2026]
+rule taxonomy_barplot:
+    input: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza, 03_uterine_swab_taxonomy_greengenes.qza, metadata.txt
+    output: 03_uterine_swab_taxonomy_barplot_greengenes.qzv
+    jobid: 8
+    reason: Missing output files: 03_uterine_swab_taxonomy_barplot_greengenes.qzv; Input files updated by another job: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza, 03_uterine_swab_taxonomy_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime taxa barplot 		--i-table 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza 		--i-taxonomy 03_uterine_swab_taxonomy_greengenes.qza 		--m-metadata-file metadata.txt 		--o-visualization 03_uterine_swab_taxonomy_barplot_greengenes.qzv
+
+[Fri Feb  6 19:21:53 2026]
+rule rarefaction:
+    input: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza, metadata.txt
+    output: 03_uterine_swabs_alpha_rarefaction_curves_16S_greengenes.qzv
+    jobid: 1
+    reason: Missing output files: 03_uterine_swabs_alpha_rarefaction_curves_16S_greengenes.qzv; Input files updated by another job: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime diversity alpha-rarefaction 		--i-table 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza 		--m-metadata-file metadata.txt 		--o-visualization 03_uterine_swabs_alpha_rarefaction_curves_16S_greengenes.qzv 		--p-min-depth 10 		--p-max-depth 6000
+Saved Visualization to: 03_uterine_swab_taxonomy_barplot_greengenes.qzv
+[Fri Feb  6 19:22:07 2026]
+Finished job 8.
+6 of 11 steps (55%) done
+Saved Visualization to: 03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qzv
+[Fri Feb  6 19:22:13 2026]
+Finished job 6.
+7 of 11 steps (64%) done
+Saved Visualization to: 03_uterine_swabs_alpha_rarefaction_curves_16S_greengenes.qzv
+[Fri Feb  6 19:23:50 2026]
+Finished job 1.
+8 of 11 steps (73%) done

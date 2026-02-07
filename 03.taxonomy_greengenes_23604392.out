@@ -1,0 +1,299 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                             count
+----------------------------  -------
+all                                 1
+classify_features                   1
+diversity                           1
+filter_mito_chloro                  1
+filter_samples_read_number          1
+filter_sequences_read_number        1
+make_tree                           1
+rarefaction                         1
+taxonomy_barplot                    1
+visualize_features                  1
+visualize_filtered                  1
+total                              11
+
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (2)
+Select jobs to execute...
+Welcome to the CBC MILP Solver 
+Version: 2.10.12 
+Build Date: Sep  3 2024 
+
+command line - cbc /scratch/alpine/c829993361@colostate.edu/.tmp/58fab387a3214e9bb911ae6035d957db-pulp.mps max timeMode elapsed branch printingOptions all solution /scratch/alpine/c829993361@colostate.edu/.tmp/58fab387a3214e9bb911ae6035d957db-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 7 COLUMNS
+At line 18 RHS
+At line 21 BOUNDS
+At line 24 ENDATA
+Problem MODEL has 2 rows, 2 columns and 4 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 4 - 0.00 seconds
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from 4 to 1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                4.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.01
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.02
+
+Selected jobs (2)
+Resources after job selection: {'_cores': 2, '_nodes': 9223372036854775805}
+
+[Fri Feb  6 16:01:40 2026]
+rule make_tree:
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza
+    output: 03_uterine_swab_tree_greengenes.qza, 03_uterine_swab_tree_placements_greengenes.qza
+    jobid: 10
+    reason: Missing output files: 03_uterine_swab_tree_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza
+
+[Fri Feb  6 16:01:40 2026]
+rule classify_features:
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza
+    output: 03_uterine_swab_taxonomy_greengenes.qza
+    jobid: 5
+    reason: Missing output files: 03_uterine_swab_taxonomy_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-classifier classify-sklearn 		--i-reads 02_repSeqs_uterine_swab.qza 		--i-classifier /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--o-classification 03_uterine_swab_taxonomy_greengenes.qza
+Usage: qiime feature-classifier classify-sklearn [OPTIONS]
+
+  Classify reads by taxon using a fitted classifier.
+
+Inputs:
+  --i-reads ARTIFACT FeatureData[Sequence]
+                         The feature data to be classified.         [required]
+  --i-classifier ARTIFACT
+    TaxonomicClassifier  The taxonomic classifier for classifying the reads.
+                                                                    [required]
+Parameters:
+  --p-reads-per-batch VALUE Int % Range(1, None) | Str % Choices('auto')
+                         Number of reads to process in each batch. If "auto",
+                         this parameter is autoscaled to min( number of query
+                         sequences / n-jobs, 20000).         [default: 'auto']
+  --p-n-jobs NTHREADS    The maximum number of concurrent worker processes.
+                         If 0 all CPUs are used. If 1 is given, no parallel
+                         computing code is used at all, which is useful for
+                         debugging.                               [default: 1]
+  --p-pre-dispatch TEXT  "all" or expression, as in "3*n_jobs". The number of
+                         batches (of tasks) to be pre-dispatched.
+                                                         [default: '2*n_jobs']
+  --p-confidence VALUE Float % Range(0, 1, inclusive_end=True) | Str %
+    Choices('disable')   Confidence threshold for limiting taxonomic depth.
+                         Set to "disable" to disable confidence calculation,
+                         or 0 to calculate confidence but not apply it to
+                         limit the taxonomic depth of the assignments.
+                                                                [default: 0.7]
+  --p-read-orientation TEXT Choices('same', 'reverse-complement', 'auto')
+                         Direction of reads with respect to reference
+                         sequences. same will cause reads to be classified
+                         unchanged; reverse-complement will cause reads to be
+                         reversed and complemented prior to classification.
+                         "auto" will autodetect orientation based on the
+                         confidence estimates for the first 100 reads.
+                                                             [default: 'auto']
+Outputs:
+  --o-classification ARTIFACT FeatureData[Taxonomy]
+                                                                    [required]
+Miscellaneous:
+  --output-dir PATH      Output unspecified results to a directory
+  --verbose / --quiet    Display verbose output to stdout and/or stderr
+                         during execution of this action. Or silence output if
+                         execution is successful (silence is golden).
+  --example-data PATH    Write example data and exit.
+  --citations            Show citations and exit.
+  --use-cache DIRECTORY  Specify the cache to be used for the intermediate
+                         work of this action. If not provided, the default
+                         cache under $TMP/qiime2/<uname> will be used.
+                         IMPORTANT FOR HPC USERS: If you are on an HPC system
+                         and are using parallel execution it is important to
+                         set this to a location that is globally accessible to
+                         all nodes in the cluster.
+  --help                 Show this message and exit.
+
+                    There was a problem with the command:                     
+ (1/1) Invalid value for '--i-classifier': Expected an artifact of at least
+  type TaxonomicClassifier. An artifact of type FeatureData[Taxonomy] was
+  provided.
+Usage: qiime fragment-insertion sepp [OPTIONS]
+
+  Perform fragment insertion of sequences using the SEPP algorithm.
+
+Inputs:
+  --i-representative-sequences ARTIFACT FeatureData[Sequence]
+                         The sequences to insert into the reference tree.
+                                                                    [required]
+  --i-reference-database ARTIFACT SeppReferenceDatabase
+                         The reference database to insert the representative
+                         sequences into.                            [required]
+Parameters:
+  --p-alignment-subset-size INTEGER
+                         Each placement subset is further broken into subsets
+                         of at most these many sequences and a separate HMM is
+                         trained on each subset.               [default: 1000]
+  --p-placement-subset-size INTEGER
+                         The tree is divided into subsets such that each
+                         subset includes at most these many subsets. The
+                         placement step places the fragment on only one
+                         subset, determined based on alignment scores. Further
+                         reading:
+                         https://github.com/smirarab/sepp/blob/master/tutorial
+                         /sepp-tutorial.md#sample-datasets-default-parameters.
+                                                               [default: 5000]
+  --p-threads NTHREADS   The number of threads to use. Pass 0 to use one per
+                         available core.                          [default: 1]
+  --p-debug / --p-no-debug
+                         Collect additional run information to STDOUT for
+                         debugging. Temporary directories will not be removed
+                         if run fails.                        [default: False]
+Outputs:
+  --o-tree ARTIFACT      The tree with inserted feature data.
+    Phylogeny[Rooted]                                               [required]
+  --o-placements ARTIFACT
+    Placements           Information about the feature placements within the
+                         reference tree.                            [required]
+Miscellaneous:
+  --output-dir PATH      Output unspecified results to a directory
+  --verbose / --quiet    Display verbose output to stdout and/or stderr
+                         during execution of this action. Or silence output if
+                         execution is successful (silence is golden).
+  --example-data PATH    Write example data and exit.
+  --citations            Show citations and exit.
+  --use-cache DIRECTORY  Specify the cache to be used for the intermediate
+                         work of this action. If not provided, the default
+                         cache under $TMP/qiime2/<uname> will be used.
+                         IMPORTANT FOR HPC USERS: If you are on an HPC system
+                         and are using parallel execution it is important to
+                         set this to a location that is globally accessible to
+                         all nodes in the cluster.
+  --help                 Show this message and exit.
+
+                    There was a problem with the command:                     
+ (1/1) Invalid value for '--i-reference-database': Expected an artifact of at
+  least type SeppReferenceDatabase. An artifact of type FeatureData[Taxonomy]
+  was provided.
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 38, in __rule_classify_features
+    shell:
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime feature-classifier classify-sklearn 		--i-reads 02_repSeqs_uterine_swab.qza 		--i-classifier /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--o-classification 03_uterine_swab_taxonomy_greengenes.qza' returned non-zero exit status 1.
+
+[Fri Feb  6 16:02:04 2026]
+Error in rule classify_features:
+    jobid: 5
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza
+    output: 03_uterine_swab_taxonomy_greengenes.qza
+    shell:
+        qiime feature-classifier classify-sklearn 		--i-reads 02_repSeqs_uterine_swab.qza 		--i-classifier /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--o-classification 03_uterine_swab_taxonomy_greengenes.qza
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 38, in __rule_classify_features
+    shell:
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime feature-classifier classify-sklearn 		--i-reads 02_repSeqs_uterine_swab.qza 		--i-classifier /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--o-classification 03_uterine_swab_taxonomy_greengenes.qza' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 715, in _callback
+    raise ex
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 699, in cached_or_run
+    run_func(*args)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2692, in run_wrapper
+    raise RuleException(
+snakemake.exceptions.RuleException: CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes, line 16:
+Command 'set -euo pipefail;  qiime feature-classifier classify-sklearn 		--i-reads 02_repSeqs_uterine_swab.qza 		--i-classifier /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--o-classification 03_uterine_swab_taxonomy_greengenes.qza' returned non-zero exit status 1.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 16, in __rule_classify_features
+
+RuleException:
+CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes, line 16:
+Command 'set -euo pipefail;  qiime feature-classifier classify-sklearn 		--i-reads 02_repSeqs_uterine_swab.qza 		--i-classifier /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--o-classification 03_uterine_swab_taxonomy_greengenes.qza' returned non-zero exit status 1.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 16, in __rule_classify_features
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 240, in __rule_make_tree
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 1.
+
+[Fri Feb  6 16:02:04 2026]
+Error in rule make_tree:
+    jobid: 10
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza
+    output: 03_uterine_swab_tree_greengenes.qza, 03_uterine_swab_tree_placements_greengenes.qza
+    shell:
+        qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 240, in __rule_make_tree
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 715, in _callback
+    raise ex
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 699, in cached_or_run
+    run_func(*args)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2692, in run_wrapper
+    raise RuleException(
+snakemake.exceptions.RuleException: CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes, line 102:
+Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 1.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 102, in __rule_make_tree
+
+RuleException:
+CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes, line 102:
+Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.tax.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 1.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 102, in __rule_make_tree
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2026-02-06T160138.381624.snakemake.log
+unlocking
+removing lock
+removing lock
+removed all locks
