@@ -1,10 +1,20 @@
 rule all:
 	input:
-		"03_uterine_swabs_alpha_rarefaction_curves_16S_greengenes.qzv",
-		"03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qzv",
 		"03_uterine_swab_taxonomy_greengenes.qzv",
-		"03_uterine_swab_taxonomy_barplot_greengenes.qzv",
-		directory("03_uterine_swab_core-metrics-results_greengenes")
+		"03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv",
+		"03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qzv",
+		"03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qzv",
+		"03_uterine_swab_taxonomy_greengenes.qzv",
+		"03_uterine_swab_taxonomy_barplot_samples_1_reads_30_greengenes.qzv",
+                "03_uterine_swab_taxonomy_barplot_samples_2_reads_20_greengenes.qzv",
+                "03_uterine_swab_taxonomy_barplot_samples_3_reads_10_greengenes.qzv",
+		"03_uterine_swabs_alpha_rarefaction_curves_samples_1_reads_30_greengenes.qzv",
+                "03_uterine_swabs_alpha_rarefaction_curves_samples_2_reads_20_greengenes.qzv",
+                "03_uterine_swabs_alpha_rarefaction_curves_samples_3_reads_10_greengenes.qzv",
+		directory("03_uterine_swab_beta_div_samples_1_reads_30_greengenes"),
+                directory("03_uterine_swab_beta_div_samples_2_reads_20_greengenes"),
+                directory("03_uterine_swab_beta_div_samples_3_reads_10_greengenes")
+
 
 rule classify_features:
 	input:
@@ -53,23 +63,48 @@ rule filter_samples_read_number:
 		 --p-min-frequency 1000 \
 		 --o-filtered-table {output}"
 
-rule filter_sequences_read_number:
+rule filter_sequences_read_number_3_10:
 	input:
 		"03_table_uterine_swab_filter_taxa_samples_greengenes.qza"
 	output:
-		"03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza"
+		"03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qza"
 	shell:
 		"qiime feature-table filter-features \
 		 --i-table {input} \
-		 --p-min-frequency 5 \
+		 --p-min-frequency 10 \
+		 --p-min-samples 3 \
 		 --o-filtered-table {output}"
+
+rule filter_sequences_read_number_2_20:
+	input:
+		"03_table_uterine_swab_filter_taxa_samples_greengenes.qza"
+	output:
+		"03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qza"
+	shell:
+		"qiime feature-table filter-features \
+		 --i-table {input} \
+		 --p-min-frequency 20 \
+		 --p-min-samples 2 \
+		 --o-filtered-table {output}"
+
+rule filter_sequences_read_number_1_30:
+	input:
+		"03_table_uterine_swab_filter_taxa_samples_greengenes.qza"
+	output:
+		"03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qza"
+	shell:
+		"qiime feature-table filter-features \
+		--i-table {input} \
+		--p-min-frequency 30 \
+		--p-min-samples 1 \
+		--o-filtered-table {output}"
 
 rule visualize_filtered:
 	input:
-		filt="03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza",
+		filt="03_table_uterine_swab_filter_taxa_{filter}_greengenes.qza",
 		meta="metadata.txt"
 	output:
-		"03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qzv"
+		"03_table_uterine_swab_filter_taxa_{filter}_greengenes.qzv"
 	shell:
 		"qiime feature-table summarize \
 		--i-table {input.filt} \
@@ -78,11 +113,11 @@ rule visualize_filtered:
 
 rule taxonomy_barplot:
 	input:
-		table="03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza",
+		table="03_table_uterine_swab_filter_taxa_{filter}_greengenes.qza",
 		taxa="03_uterine_swab_taxonomy_greengenes.qza",
 		meta="metadata.txt"
 	output:
-		"03_uterine_swab_taxonomy_barplot_greengenes.qzv"
+		"03_uterine_swab_taxonomy_barplot_{filter}_greengenes.qzv"
 	shell:
 		"qiime taxa barplot \
 		--i-table {input.table} \
@@ -109,10 +144,10 @@ rule make_tree:
 
 rule rarefaction:
 	input:
-		filt="03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza",
+		filt="03_table_uterine_swab_filter_taxa_{filter}_greengenes.qza",
 		meta="metadata.txt"
 	output:
-		"03_uterine_swabs_alpha_rarefaction_curves_16S_greengenes.qzv"
+		"03_uterine_swabs_alpha_rarefaction_curves_{filter}_greengenes.qzv"
 	shell:
 		"qiime diversity alpha-rarefaction \
 		--i-table {input.filt} \
@@ -123,16 +158,16 @@ rule rarefaction:
 
 rule diversity:
 	input:
-		table="03_table_uterine_swab_filter_taxa_samples_reads_greengenes.qza",
+		table="03_table_uterine_swab_filter_taxa_{filter}_greengenes.qza",
 		tree="03_uterine_swab_tree_greengenes.qza",
 		meta="metadata.txt"
 	output:
-		directory("03_uterine_swab_core-metrics-results_greengenes")
+		directory("03_uterine_swab_beta_div_{filter}_greengenes")
 	shell:
 		"qiime diversity core-metrics-phylogenetic \
 		--i-table {input.table} \
 		--i-phylogeny {input.tree} \
 		--m-metadata-file {input.meta} \
 		--p-sampling-depth 1300 \
-		--output-dir core-metrics-results"
+		--output-dir {output}"
 
