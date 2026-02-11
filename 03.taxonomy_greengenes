@@ -137,7 +137,7 @@ rule make_tree:
 		"qiime fragment-insertion sepp \
 		--i-representative-sequences {input.repseqs} \
 		--i-reference-database {input.backbone} \
-		--p-threads 12 \
+		--p-threads 0 \
 		--o-tree {output.tree} \
 		--o-placements {output.placements}"
 

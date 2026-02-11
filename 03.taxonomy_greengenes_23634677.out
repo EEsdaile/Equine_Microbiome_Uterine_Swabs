@@ -1,0 +1,306 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+diversity               3
+make_tree               1
+rarefaction             3
+taxonomy_barplot        3
+total                  11
+
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (7)
+Select jobs to execute...
+Welcome to the CBC MILP Solver 
+Version: 2.10.12 
+Build Date: Sep  3 2024 
+
+command line - cbc /scratch/alpine/c829993361@colostate.edu/.tmp/6f27f8242dc047a2ae8c188cf89e8ba6-pulp.mps max timeMode elapsed branch printingOptions all solution /scratch/alpine/c829993361@colostate.edu/.tmp/6f27f8242dc047a2ae8c188cf89e8ba6-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 7 COLUMNS
+At line 43 RHS
+At line 46 BOUNDS
+At line 54 ENDATA
+Problem MODEL has 2 rows, 7 columns and 14 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 8 - 0.00 seconds
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from 8 to 1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                8.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.00
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Selected jobs (4)
+Resources after job selection: {'_cores': 0, '_nodes': 9223372036854775803}
+
+[Sat Feb  7 09:09:20 2026]
+rule rarefaction:
+    input: 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qza, metadata.txt
+    output: 03_uterine_swabs_alpha_rarefaction_curves_samples_2_reads_20_greengenes.qzv
+    jobid: 15
+    reason: Missing output files: 03_uterine_swabs_alpha_rarefaction_curves_samples_2_reads_20_greengenes.qzv
+    wildcards: filter=samples_2_reads_20
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime diversity alpha-rarefaction 		--i-table 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qza 		--m-metadata-file metadata.txt 		--o-visualization 03_uterine_swabs_alpha_rarefaction_curves_samples_2_reads_20_greengenes.qzv 		--p-min-depth 10 		--p-max-depth 6000
+
+[Sat Feb  7 09:09:20 2026]
+rule taxonomy_barplot:
+    input: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qza, 03_uterine_swab_taxonomy_greengenes.qza, metadata.txt
+    output: 03_uterine_swab_taxonomy_barplot_samples_1_reads_30_greengenes.qzv
+    jobid: 11
+    reason: Missing output files: 03_uterine_swab_taxonomy_barplot_samples_1_reads_30_greengenes.qzv
+    wildcards: filter=samples_1_reads_30
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime taxa barplot 		--i-table 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qza 		--i-taxonomy 03_uterine_swab_taxonomy_greengenes.qza 		--m-metadata-file metadata.txt 		--o-visualization 03_uterine_swab_taxonomy_barplot_samples_1_reads_30_greengenes.qzv
+
+[Sat Feb  7 09:09:20 2026]
+rule taxonomy_barplot:
+    input: 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qza, 03_uterine_swab_taxonomy_greengenes.qza, metadata.txt
+    output: 03_uterine_swab_taxonomy_barplot_samples_2_reads_20_greengenes.qzv
+    jobid: 12
+    reason: Missing output files: 03_uterine_swab_taxonomy_barplot_samples_2_reads_20_greengenes.qzv
+    wildcards: filter=samples_2_reads_20
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime taxa barplot 		--i-table 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qza 		--i-taxonomy 03_uterine_swab_taxonomy_greengenes.qza 		--m-metadata-file metadata.txt 		--o-visualization 03_uterine_swab_taxonomy_barplot_samples_2_reads_20_greengenes.qzv
+
+[Sat Feb  7 09:09:20 2026]
+rule taxonomy_barplot:
+    input: 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qza, 03_uterine_swab_taxonomy_greengenes.qza, metadata.txt
+    output: 03_uterine_swab_taxonomy_barplot_samples_3_reads_10_greengenes.qzv
+    jobid: 13
+    reason: Missing output files: 03_uterine_swab_taxonomy_barplot_samples_3_reads_10_greengenes.qzv
+    wildcards: filter=samples_3_reads_10
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime taxa barplot 		--i-table 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qza 		--i-taxonomy 03_uterine_swab_taxonomy_greengenes.qza 		--m-metadata-file metadata.txt 		--o-visualization 03_uterine_swab_taxonomy_barplot_samples_3_reads_10_greengenes.qzv
+Saved Visualization to: 03_uterine_swab_taxonomy_barplot_samples_3_reads_10_greengenes.qzv
+Saved Visualization to: 03_uterine_swab_taxonomy_barplot_samples_2_reads_20_greengenes.qzv
+[Sat Feb  7 09:10:10 2026]
+Finished job 13.
+1 of 11 steps (9%) done
+Resources before job selection: {'_cores': 1, '_nodes': 9223372036854775804}
+Ready jobs (3)
+Select jobs to execute...
+Welcome to the CBC MILP Solver 
+Version: 2.10.12 
+Build Date: Sep  3 2024 
+
+command line - cbc /scratch/alpine/c829993361@colostate.edu/.tmp/64096a02b0c644668a1f290852a711cc-pulp.mps max timeMode elapsed branch printingOptions all solution /scratch/alpine/c829993361@colostate.edu/.tmp/64096a02b0c644668a1f290852a711cc-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 7 COLUMNS
+At line 23 RHS
+At line 26 BOUNDS
+At line 30 ENDATA
+Problem MODEL has 2 rows, 3 columns and 6 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 2 - 0.00 seconds
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from 2 to 1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                2.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.00
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Selected jobs (1)
+Resources after job selection: {'_cores': 0, '_nodes': 9223372036854775803}
+
+[Sat Feb  7 09:10:10 2026]
+rule make_tree:
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza
+    output: 03_uterine_swab_tree_greengenes.qza, 03_uterine_swab_tree_placements_greengenes.qza
+    jobid: 18
+    reason: Missing output files: 03_uterine_swab_tree_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza
+Saved Visualization to: 03_uterine_swab_taxonomy_barplot_samples_1_reads_30_greengenes.qzv
+[Sat Feb  7 09:10:13 2026]
+Finished job 12.
+2 of 11 steps (18%) done
+Resources before job selection: {'_cores': 1, '_nodes': 9223372036854775804}
+Ready jobs (2)
+Select jobs to execute...
+Welcome to the CBC MILP Solver 
+Version: 2.10.12 
+Build Date: Sep  3 2024 
+
+command line - cbc /scratch/alpine/c829993361@colostate.edu/.tmp/7d7cac4872c94fec8918ee06c8a04c7c-pulp.mps max timeMode elapsed branch printingOptions all solution /scratch/alpine/c829993361@colostate.edu/.tmp/7d7cac4872c94fec8918ee06c8a04c7c-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 7 COLUMNS
+At line 18 RHS
+At line 21 BOUNDS
+At line 24 ENDATA
+Problem MODEL has 2 rows, 2 columns and 4 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 2 - 0.00 seconds
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from 2 to 1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                2.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.00
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.01
+
+Selected jobs (1)
+Resources after job selection: {'_cores': 0, '_nodes': 9223372036854775803}
+
+[Sat Feb  7 09:10:13 2026]
+rule rarefaction:
+    input: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qza, metadata.txt
+    output: 03_uterine_swabs_alpha_rarefaction_curves_samples_1_reads_30_greengenes.qzv
+    jobid: 14
+    reason: Missing output files: 03_uterine_swabs_alpha_rarefaction_curves_samples_1_reads_30_greengenes.qzv
+    wildcards: filter=samples_1_reads_30
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime diversity alpha-rarefaction 		--i-table 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qza 		--m-metadata-file metadata.txt 		--o-visualization 03_uterine_swabs_alpha_rarefaction_curves_samples_1_reads_30_greengenes.qzv 		--p-min-depth 10 		--p-max-depth 6000
+[Sat Feb  7 09:10:15 2026]
+Finished job 11.
+3 of 11 steps (27%) done
+Resources before job selection: {'_cores': 1, '_nodes': 9223372036854775804}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 0, '_nodes': 9223372036854775803}
+
+[Sat Feb  7 09:10:15 2026]
+rule rarefaction:
+    input: 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qza, metadata.txt
+    output: 03_uterine_swabs_alpha_rarefaction_curves_samples_3_reads_10_greengenes.qzv
+    jobid: 16
+    reason: Missing output files: 03_uterine_swabs_alpha_rarefaction_curves_samples_3_reads_10_greengenes.qzv
+    wildcards: filter=samples_3_reads_10
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime diversity alpha-rarefaction 		--i-table 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qza 		--m-metadata-file metadata.txt 		--o-visualization 03_uterine_swabs_alpha_rarefaction_curves_samples_3_reads_10_greengenes.qzv 		--p-min-depth 10 		--p-max-depth 6000
+/usr/bin/bash: line 1: 524760 Killed                  qiime fragment-insertion sepp --i-representative-sequences 02_repSeqs_uterine_swab.qza --i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza --p-threads 12 --o-tree 03_uterine_swab_tree_greengenes.qza --o-placements 03_uterine_swab_tree_placements_greengenes.qza
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 310, in __rule_make_tree
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 137.
+
+[Sat Feb  7 09:13:29 2026]
+Error in rule make_tree:
+    jobid: 18
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza
+    output: 03_uterine_swab_tree_greengenes.qza, 03_uterine_swab_tree_placements_greengenes.qza
+    shell:
+        qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 310, in __rule_make_tree
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 137.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 715, in _callback
+    raise ex
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 699, in cached_or_run
+    run_func(*args)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2692, in run_wrapper
+    raise RuleException(
+snakemake.exceptions.RuleException: CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes, line 137:
+Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 137.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 137, in __rule_make_tree
+
+RuleException:
+CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes, line 137:
+Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 137.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 137, in __rule_make_tree
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+Saved Visualization to: 03_uterine_swabs_alpha_rarefaction_curves_samples_2_reads_20_greengenes.qzv
+[Sat Feb  7 09:15:23 2026]
+Finished job 15.
+4 of 11 steps (36%) done
+Saved Visualization to: 03_uterine_swabs_alpha_rarefaction_curves_samples_1_reads_30_greengenes.qzv
+[Sat Feb  7 09:16:30 2026]
+Finished job 14.
+5 of 11 steps (45%) done
+Saved Visualization to: 03_uterine_swabs_alpha_rarefaction_curves_samples_3_reads_10_greengenes.qzv
+[Sat Feb  7 09:17:05 2026]
+Finished job 16.
+6 of 11 steps (55%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2026-02-07T090919.283540.snakemake.log
+unlocking
+removing lock
+removing lock
+removed all locks
+slurmstepd: error: Detected 1 oom_kill event in StepId=23634677.batch. Some of the step tasks have been OOM Killed.

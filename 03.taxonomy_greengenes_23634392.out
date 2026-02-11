@@ -1,0 +1,121 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                   count
+------------------  -------
+all                       1
+visualize_filtered        3
+total                     4
+
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (3)
+Select jobs to execute...
+Welcome to the CBC MILP Solver 
+Version: 2.10.12 
+Build Date: Sep  3 2024 
+
+command line - cbc /scratch/alpine/c829993361@colostate.edu/.tmp/9eaefab491e74d97aab26b310ad06581-pulp.mps max timeMode elapsed branch printingOptions all solution /scratch/alpine/c829993361@colostate.edu/.tmp/9eaefab491e74d97aab26b310ad06581-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 7 COLUMNS
+At line 23 RHS
+At line 26 BOUNDS
+At line 30 ENDATA
+Problem MODEL has 2 rows, 3 columns and 6 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 6 - 0.00 seconds
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from 6 to 1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                6.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.00
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Selected jobs (3)
+Resources after job selection: {'_cores': 1, '_nodes': 9223372036854775804}
+
+[Sat Feb  7 08:59:01 2026]
+rule visualize_filtered:
+    input: 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qza, metadata.txt
+    output: 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qzv
+    jobid: 7
+    reason: Missing output files: 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qzv
+    wildcards: filter=samples_2_reads_20
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-table summarize 		--i-table 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qza 		--m-sample-metadata-file metadata.txt 		--o-visualization 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qzv
+
+[Sat Feb  7 08:59:01 2026]
+rule visualize_filtered:
+    input: 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qza, metadata.txt
+    output: 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qzv
+    jobid: 9
+    reason: Missing output files: 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qzv
+    wildcards: filter=samples_3_reads_10
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-table summarize 		--i-table 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qza 		--m-sample-metadata-file metadata.txt 		--o-visualization 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qzv
+
+[Sat Feb  7 08:59:01 2026]
+rule visualize_filtered:
+    input: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qza, metadata.txt
+    output: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+    jobid: 3
+    reason: Missing output files: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+    wildcards: filter=samples_1_reads_30
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-table summarize 		--i-table 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qza 		--m-sample-metadata-file metadata.txt 		--o-visualization 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+Saved Visualization to: 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qzv
+Saved Visualization to: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+Saved Visualization to: 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qzv
+[Sat Feb  7 08:59:19 2026]
+Finished job 9.
+1 of 4 steps (25%) done
+[Sat Feb  7 08:59:19 2026]
+Finished job 7.
+2 of 4 steps (50%) done
+[Sat Feb  7 08:59:20 2026]
+Finished job 3.
+3 of 4 steps (75%) done
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+
+[Sat Feb  7 08:59:20 2026]
+localrule all:
+    input: 03_uterine_swabs_alpha_rarefaction_curves_16S_greengenes.qzv, 03_uterine_swab_taxonomy_greengenes.qzv, 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv, 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qzv, 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qzv
+    jobid: 0
+    reason: Input files updated by another job: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv, 03_table_uterine_swab_filter_taxa_samples_3_reads_10_greengenes.qzv, 03_table_uterine_swab_filter_taxa_samples_2_reads_20_greengenes.qzv
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+[Sat Feb  7 08:59:20 2026]
+Finished job 0.
+4 of 4 steps (100%) done
+Complete log: .snakemake/log/2026-02-07T085900.213243.snakemake.log
+unlocking
+removing lock
+removing lock
+removed all locks

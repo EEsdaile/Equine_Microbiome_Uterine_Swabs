@@ -1,0 +1,12 @@
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/__init__.py", line 671, in snakemake
+    workflow.include(
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/workflow.py", line 1389, in include
+    exec(compile(code, snakefile.get_path_or_uri(), "exec"), self.globals)
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 298
+    	"qiime fragment-insertion sepp \
+    	^
+SyntaxError: unterminated string literal (detected at line 302)
+
+SyntaxError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes, line 137:
+unterminated string literal (detected at line 302)

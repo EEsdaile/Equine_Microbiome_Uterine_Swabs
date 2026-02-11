@@ -1,0 +1,54 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                   count
+------------------  -------
+all                       1
+visualize_filtered        1
+total                     2
+
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+
+[Sat Feb  7 08:56:27 2026]
+rule visualize_filtered:
+    input: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qza, metadata.txt
+    output: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+    jobid: 3
+    reason: Missing output files: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+    wildcards: filter=samples_1_reads_30
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime feature-table summarize 		--i-table 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qza 		--m-sample-metadata-file metadata.txt 		--o-visualization 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+Saved Visualization to: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+[Sat Feb  7 08:56:46 2026]
+Finished job 3.
+1 of 2 steps (50%) done
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+
+[Sat Feb  7 08:56:46 2026]
+localrule all:
+    input: 03_uterine_swabs_alpha_rarefaction_curves_16S_greengenes.qzv, 03_uterine_swab_taxonomy_greengenes.qzv, 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+    jobid: 0
+    reason: Input files updated by another job: 03_table_uterine_swab_filter_taxa_samples_1_reads_30_greengenes.qzv
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+[Sat Feb  7 08:56:46 2026]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: .snakemake/log/2026-02-07T085626.212141.snakemake.log
+unlocking
+removing lock
+removing lock
+removed all locks

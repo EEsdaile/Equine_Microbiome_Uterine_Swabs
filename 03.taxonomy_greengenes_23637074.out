@@ -1,0 +1,89 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job          count
+---------  -------
+all              1
+diversity        3
+make_tree        1
+total            5
+
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 3, '_nodes': 9223372036854775806}
+
+[Sat Feb  7 10:14:46 2026]
+rule make_tree:
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza
+    output: 03_uterine_swab_tree_greengenes.qza, 03_uterine_swab_tree_placements_greengenes.qza
+    jobid: 18
+    reason: Missing output files: 03_uterine_swab_tree_greengenes.qza
+    resources: tmpdir=/scratch/alpine/c829993361@colostate.edu/.tmp
+
+qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza
+Plugin error from fragment-insertion:
+
+  Command '['run-sepp.sh', '/scratch/alpine/c829993361@colostate.edu/.tmp/qiime2/c829993361@colostate.edu/data/8fcf2d56-8bc9-4bfc-9d2d-af0e8a8941d3/data/dna-sequences.fasta', 'q2-fragment-insertion', '-x', '12', '-A', '1000', '-P', '5000', '-a', '/scratch/alpine/c829993361@colostate.edu/.tmp/qiime2/c829993361@colostate.edu/data/9e8f6bb7-1444-4e32-b5fd-92cd5823d3ee/data/aligned-dna-sequences.fasta', '-t', '/scratch/alpine/c829993361@colostate.edu/.tmp/qiime2/c829993361@colostate.edu/data/9e8f6bb7-1444-4e32-b5fd-92cd5823d3ee/data/tree.nwk', '-r', '/scratch/alpine/c829993361@colostate.edu/.tmp/qiime2/c829993361@colostate.edu/data/9e8f6bb7-1444-4e32-b5fd-92cd5823d3ee/data/raxml-info.txt']' returned non-zero exit status 137.
+
+Debug info has been saved to /scratch/alpine/c829993361@colostate.edu/.tmp/qiime2-q2cli-err-uf67g1th.log
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 310, in __rule_make_tree
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 1.
+
+[Sat Feb  7 10:40:34 2026]
+Error in rule make_tree:
+    jobid: 18
+    input: 02_repSeqs_uterine_swab.qza, /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza
+    output: 03_uterine_swab_tree_greengenes.qza, 03_uterine_swab_tree_placements_greengenes.qza
+    shell:
+        qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Full Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2656, in run_wrapper
+    run(
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 310, in __rule_make_tree
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/shell.py", line 294, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 715, in _callback
+    raise ex
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 699, in cached_or_run
+    run_func(*args)
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/site-packages/snakemake/executors/__init__.py", line 2692, in run_wrapper
+    raise RuleException(
+snakemake.exceptions.RuleException: CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes, line 137:
+Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 1.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 137, in __rule_make_tree
+
+RuleException:
+CalledProcessError in file /gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes, line 137:
+Command 'set -euo pipefail;  qiime fragment-insertion sepp 		--i-representative-sequences 02_repSeqs_uterine_swab.qza 		--i-reference-database /projects/c829993361@colostate.edu/microbiome_taxonomy/greengenes_2022.10/ftp.microbio.me/greengenes_release/2022.10-rc1/2022.10.backbone.sepp-reference.qza 		--p-threads 12 		--o-tree 03_uterine_swab_tree_greengenes.qza 		--o-placements 03_uterine_swab_tree_placements_greengenes.qza' returned non-zero exit status 1.
+  File "/gpfs/alpine1/scratch/c829993361@colostate.edu/Equine_Microbiome_Uterine_Swabs/03.taxonomy_greengenes", line 137, in __rule_make_tree
+  File "/projects/c829993361@colostate.edu/software/anaconda/envs/qiime2-amplicon-2024.10/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2026-02-07T101445.128178.snakemake.log
+unlocking
+removing lock
+removing lock
+removed all locks
+slurmstepd: error: Detected 1 oom_kill event in StepId=23637074.batch. Some of the step tasks have been OOM Killed.
